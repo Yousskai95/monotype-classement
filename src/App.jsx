@@ -18,12 +18,46 @@ export default function App() {
     fetchPlayers();
   }, []);
 
+  const top3 = players.slice(0, 3);
+  const rest = players.slice(3);
+
+  const colors = ['from-yellow-300 to-yellow-500', 'from-gray-300 to-gray-500', 'from-orange-300 to-orange-500'];
+  const medals = ['🥇', '🥈', '🥉'];
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
         🏆 Classement Pokémon Monotype
       </h1>
 
+      {/* 🥇 Top 3 avec effets */}
+      <div className="flex justify-center gap-6 mb-12">
+        {top3.map((player, index) => (
+          <div
+            key={player.id}
+            className={`bg-gradient-to-br ${colors[index]} rounded-xl shadow-xl text-white p-4 flex flex-col items-center transition transform duration-300 ${
+              index === 0 ? 'scale-110 z-10' : 'scale-100'
+            }`}
+          >
+            <div className="text-3xl font-bold mb-2">{medals[index]}</div>
+            <div className="text-xl font-semibold mb-1">{player.name}</div>
+            <img
+              src={`/types/${player.type}.png`}
+              alt={player.type}
+              className="w-8 h-8 mb-2"
+            />
+            <div className="text-sm mb-1">{player.badges} / {TOTAL_BADGES} badges</div>
+            <div className="w-32 h-2 bg-white bg-opacity-30 rounded-full">
+              <div
+                className="h-2 bg-white rounded-full"
+                style={{ width: `${(player.badges / TOTAL_BADGES) * 100}%` }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 🔢 Tableau général */}
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead className="bg-gray-200">
@@ -36,7 +70,7 @@ export default function App() {
             </tr>
           </thead>
           <tbody>
-            {players.map((player) => (
+            {rest.map((player) => (
               <tr key={player.id} className="border-t">
                 <td className="p-4 font-medium">{player.name}</td>
                 <td className="p-4 flex items-center gap-2">

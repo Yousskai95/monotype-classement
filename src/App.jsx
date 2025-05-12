@@ -19,8 +19,6 @@ export default function App() {
   }, []);
 
   const top3 = players.slice(0, 3);
-  const rest = players.slice(3);
-
   const colors = ['from-yellow-300 to-yellow-500', 'from-gray-300 to-gray-500', 'from-orange-300 to-orange-500'];
   const medals = ['🥇', '🥈', '🥉'];
 
@@ -57,7 +55,7 @@ export default function App() {
         ))}
       </div>
 
-      {/* 🔢 Tableau général */}
+      {/* 🔢 Tableau général (avec tout le monde) */}
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead className="bg-gray-200">
@@ -70,7 +68,7 @@ export default function App() {
             </tr>
           </thead>
           <tbody>
-            {rest.map((player) => (
+            {players.map((player) => (
               <tr key={player.id} className="border-t">
                 <td className="p-4 font-medium">{player.name}</td>
                 <td className="p-4 flex items-center gap-2">

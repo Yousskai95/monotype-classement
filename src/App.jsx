@@ -23,12 +23,19 @@ export default function App() {
   const medals = ['🥇', '🥈', '🥉'];
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen p-8 bg-white/80 backdrop-blur relative">
+      {/* 🎮 Logo fixé en haut à gauche */}
+      <img
+        src="/logo.png"
+        alt="Logo"
+        className="fixed top-4 left-4 w-20 h-auto drop-shadow-xl"
+      />
+
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
         🏆 Classement Pokémon Monotype
       </h1>
 
-      {/* 🥇 Top 3 avec effets */}
+      {/* 🥇 Top 3 avec style */}
       <div className="flex justify-center gap-6 mb-12">
         {top3.map((player, index) => (
           <div
@@ -55,7 +62,7 @@ export default function App() {
         ))}
       </div>
 
-      {/* 🔢 Tableau général (avec tout le monde) */}
+      {/* 📋 Tableau général */}
       <div className="overflow-x-auto">
         <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead className="bg-gray-200">
